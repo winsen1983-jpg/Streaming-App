@@ -32,13 +32,14 @@ pipeline {
             }
         }
         
-        stage('Build & Push Streaming Service') {
-            steps {
-                sh "docker build -t streaming-service ./backend/streamingService"
-                sh "docker tag streaming-service:latest ${ECR_REGISTRY}/streaming-service:${IMAGE_TAG}"
-                sh "docker push ${ECR_REGISTRY}/streaming-service:${IMAGE_TAG}"
-            }
-        }
+          stage('Build & Push Streaming Service') {
+    steps {
+        // பில்டு சூழலை ரூட் போல்டராகவும் (-f மூலம் Dockerfile வழியையும்) குறிப்பிடுகிறோம்
+        sh "docker build -t streaming-service -f ./backend/streamingService/Dockerfile ."
+        sh "docker tag streaming-service:latest ${ECR_REGISTRY}/streaming-service:${IMAGE_TAG}"
+        sh "docker push ${ECR_REGISTRY}/streaming-service:${IMAGE_TAG}"
+    }
+}
         
         stage('Build & Push Admin Service') {
             steps {
