@@ -1,7 +1,24 @@
+# cluster.yaml
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
+
 metadata:
-  name: streaming-auto-cluster
+  name: streaming-eks-cluster
   region: us-east-1
-autoModeConfig:
-  enabled: true
+  version: "1.30"
+
+managedNodeGroups:
+  - name: standard-workers
+    instanceType: t3.medium
+    desiredCapacity: 3
+    minSize: 2
+    maxSize: 4
+    volumeSize: 30
+    ssh:
+      allow: false
+    iam:
+      withPolicyARNs:
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy
