@@ -1,0 +1,111 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+      - name: auth-service
+        image: 985368780045.dkr.ecr.us-east-1.amazonaws.com/streaming-auth
+        ports:
+        - containerPort: 3001
+        envFrom:
+        - configMapRef:
+            name: streaming-app-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streaming-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: streaming-service
+  template:
+    metadata:
+      labels:
+        app: streaming-service
+    spec:
+      containers:
+      - name: streaming-service
+        image: 985368780045.dkr.ecr.us-east-1.amazonaws.com/streaming-service
+        ports:
+        - containerPort: 3002
+        envFrom:
+        - configMapRef:
+            name: streaming-app-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin-service
+  template:
+    metadata:
+      labels:
+        app: admin-service
+    spec:
+      containers:
+      - name: admin-service
+        image: 985368780045.dkr.ecr.us-east-1.amazonaws.com/admin-service
+        ports:
+        - containerPort: 3003
+        envFrom:
+        - configMapRef:
+            name: streaming-app-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-service
+  template:
+    metadata:
+      labels:
+        app: chat-service
+    spec:
+      containers:
+      - name: chat-service
+        image: 985368780045.dkr.ecr.us-east-1.amazonaws.com/chat-service
+        ports:
+        - containerPort: 3004
+        envFrom:
+        - configMapRef:
+            name: streaming-app-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: 985368780045.dkr.ecr.us-east-1.amazonaws.com/frontend-service
+        ports:
+        - containerPort: 80
