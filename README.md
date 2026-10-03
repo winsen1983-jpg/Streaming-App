@@ -1,4 +1,4 @@
-27-Sep-2026-Assignment:
+<img width="975" height="86" alt="image" src="https://github.com/user-attachments/assets/20f38150-ea73-4076-a566-d7181211cf18" />27-Sep-2026-Assignment:
  
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 985368780045.dkr.ecr.us-east-1.amazonaws.com
  <img width="975" height="484" alt="image" src="https://github.com/user-attachments/assets/ff26643c-39a8-4c41-b607-2f5bebfd7289" />
@@ -1003,6 +1003,72 @@ CI/CD Pipeline Completed Successfully! All images pushed to ECR.
 [Pipeline] // node
 [Pipeline] End of Pipeline
 Finished: SUCCESS
+Using the below command created the EKS Cluster:
+PS D:\DevOps&MultiCloud\Assignment\27_Sep_2026\Streaming-App> eksctl create cluster --name streaming-app-cluster --region us-east-1 --node-type t3.small --nodes 4
+
+<img width="975" height="202" alt="image" src="https://github.com/user-attachments/assets/6582586b-2663-4994-8f66-d51c50a2716c" />
+
+Helm Chart Created:
+<img width="676" height="69" alt="image" src="https://github.com/user-attachments/assets/e6f72327-fd1b-489d-8e56-
+ 9312b0f34619" />
+
+ Updated the Configmap.yaml,Ingress.yaml,Mongodb.yaml,Services-clusterip.yaml and Services-deployment.yaml in Streamingapp\templates folder
+
+Executed  helm install streaming-release ./streamingapp 
+<img width="975" height="221" alt="image" src="https://github.com/user-attachments/assets/26152e31-c401-4733-831e-4472f52af462" />
+
+<img width="975" height="103" alt="image" src="https://github.com/user-attachments/assets/48edbc7d-f63c-4672-aa08-
+ 50f28c8935a3" />
+
+ PS D:\DevOps&MultiCloud\Assignment\27_Sep_2026\Streaming-App> kubectl get pods
+ 
+ <img width="975" height="368" alt="image" src="https://github.com/user-attachments/assets/aad80a75-ec50-4329-a3ee-244f084e17ea" />
+ <img width="975" height="82" alt="image" src="https://github.com/user-attachments/assets/1f90c237-8f1c-4b52-af06-2491a4afa04e" />
+
+<img width="975" height="175" alt="image" src="https://github.com/user-attachments/assets/513e6daa-16b3-4005-9da0-f84c18b9418a" />
+
+Updated the Ingress.yaml in Streaming-App\streamingapp folder
+
+<img width="975" height="86" alt="image" src="https://github.com/user-attachments/assets/dfd700a0-4c91-468f-982c-fdddc328d714" />
+
+
+[Uploading image.png…]()
+
+used the reference article for creating "Ingress-nginx-controller"
+Ref: https://medium.com/@dikkumburage/how-to-install-nginx-ingress-controller-93a375e8edde
+
+PS D:\DevOps&MultiCloud\Assignment\27_Sep_2026\Streaming-App> helm install ingress-nginx ingress-nginx/ingress-nginx -f "D:\DevOps&MultiCloud\Assignment\27_Sep_2026\Streaming-App\values.yaml" -n ingress-nginx  
+<img width="975" height="157" alt="image" src="https://github.com/user-attachments/assets/de1b8ad5-9b79-40d7-a3e6-d0a6de102c2b" />
+<img width="975" height="87" alt="image" src="https://github.com/user-attachments/assets/61562e9d-303b-412d-a67b-92ca76d85a88" />
+
+URL: http://a06039c8fa24d4fe494a3b5a0dc596ba-576829364.us-east-1.elb.amazonaws.com   - URL for Streamline:
+
+<img width="975" height="486" alt="image" src="https://github.com/user-attachments/assets/e28f8410-53d6-4758-8005-f131eafe3cac" />
+
+Tried deleting a pods and noticed a new pod gets created right immediately
+
+<img width="975" height="410" alt="image" src="https://github.com/user-attachments/assets/661b78ee-4672-4e15-b006-11f0d00f0130" />
+
+
+Successfully Completed the project.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
