@@ -18,7 +18,7 @@ pipeline {
         stage('AWS ECR Login') {
             steps {
                 // Jenkins Credentials-இல் உள்ள AWS Keys-ஐப் பயன்படுத்தி லாகின் செய்ய
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Winsen1983']]) {
                     sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
                 }
             }
