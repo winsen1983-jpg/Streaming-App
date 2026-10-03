@@ -63,6 +63,13 @@ pipeline {
                 sh "docker push ${ECR_REGISTRY}/frontend-service:${IMAGE_TAG}"
             }
         }
+  stage('Create EKS Cluster') {
+    steps {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Winsen1983']]) {
+            sh "aws eks create-cluster --name streaming-app-cluster --region us-east-1 --version 1.31 --role-arn 'arn:aws:iam::985368780045:role/my-eks-cluster-role' --resources-vpc-config subnetIds='subnet-0123456789abcdef0,subnet-abcdef0123456789' --bootstrap-self-managed-addons"
+        }
+    }
+}
     }
     
     post {
@@ -74,3 +81,5 @@ pipeline {
         }
     }
 }
+
+
